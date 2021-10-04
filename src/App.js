@@ -11,7 +11,23 @@ function App() {
 
 
 const updateCalc = value =>{ 
+  if(
+    ops.includes(value) && calc === '' ||
+    ops.includes(value) && ops.includes(calc.slice(-1)
+    )
+  ){
+    return;
+  }
+
   setCalc(calc + value);
+    if(!ops.includes(value)){
+          setResult(eval(calc + value).toString())
+    }
+
+
+
+
+ 
 }
 
 
@@ -31,12 +47,25 @@ const updateCalc = value =>{
 
   } /* Created a function called createDigits with an empty arguments and the function is that for every digits if it's less than 10 push a button with it's unique key and increment it by 1 and it stops at ten. */
 
+  const calculate = () =>{
+    setCalc(eval(calc).toString());
+  }
+
+
+  const deleteLast = () =>{
+    if(calc === ''){
+      return;
+    }
+    const value = calc.slice(0, -1);
+
+    setCalc(value);
+  }
 
   return (
     <div className="App">
       <div className = "calculator">
     <div className="display">     
-     { result ? <span>(0)</span> : ''} { calc || "0"}
+     { result ? <span>({result})</span> : ''} { calc || "0"}
   </div>
   <div className="operators">
     <button onClick={()=>updateCalc('/')}>/</button>
@@ -44,14 +73,14 @@ const updateCalc = value =>{
     <button onClick={()=>updateCalc('+')}>+</button>
     <button onClick={()=>updateCalc('-')}>-</button>
 
-    <button>DEL</button>
+    <button onClick={deleteLast}>DEL</button>
 
   </div>
     <div className="digits">
       {createDigits()}
-      <button>0</button> 
-      <button>.</button>
-      <button>=</button>
+      <button onClick={()=>updateCalc('0')}>0</button> 
+      <button onClick={()=>updateCalc('.')}>.</button>
+      <button onClick={calculate}>=</button>
 
 
     </div>

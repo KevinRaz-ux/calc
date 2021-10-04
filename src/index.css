@@ -44,7 +44,7 @@ body{
   padding: 16px;
   text-align: right;
   background-color: var(--dark);
-  color: var(--light);
+  color: var(--blank);
   font-size: 24px;
   font-weight: 300;
 }
